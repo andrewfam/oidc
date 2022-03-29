@@ -9,12 +9,16 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+import environ
+import os
 
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env()
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -87,11 +91,11 @@ WSGI_APPLICATION = 'oidc.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'oidc_db',
-        'USER': 'oidc_admin',
-        'PASSWORD': '4B434kgStFqVu6EZ',
+        'NAME': env('POSTGRES_DATABASE_NAME'),
+        'USER': env('POSTGRES_DATABASE_USER'),
+        'PASSWORD': env('POSTGRES_DATABASE_PASSWORD'),
         'HOST': 'localhost',
-        'PORT': '',                      # Set to empty string for default.
+        'PORT': env('POSTGRES_DATABASE_PORT'),                      # Set to empty string for default.
     }
 }
 
