@@ -5,15 +5,13 @@ from django.core.serializers import serialize
 from oidc_provider.lib.claims import ScopeClaims
 
 def userinfo(claims, user):
+    # Populate claims dict.
+    claims['name'] = '{0} {1}'.format(user.first_name, user.last_name)
+    claims['given_name'] = user.first_name
+    claims['family_name'] = user.last_name
     claims['email'] = user.email
+    claims['address']['street_address'] = '...'
 
-    json_str_response = serialize('json', [user.profile], ensure_ascii=False)
-    response = json.loads(json_str_response)
-
-    claims['profile'] = response
-    claims['given_name'] = user.profile.first_name
-    claims['family_name'] = user.profile.last_name
-    
     return claims
 
 class CustomScopeClaims(ScopeClaims):

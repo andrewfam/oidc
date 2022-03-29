@@ -144,7 +144,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/accounts/login/'
 
 OIDC_USERINFO = 'oidc.oidc_settings.userinfo'
-OIDC_EXTRA_SCOPE_CLAIMS = 'oidc.oidc_settings.CustomScopeClaims'
+#OIDC_EXTRA_SCOPE_CLAIMS = 'oidc.oidc_settings.CustomScopeClaims'
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
